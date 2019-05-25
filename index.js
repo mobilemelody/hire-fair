@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const mysql = require('./dbcon.js');
 const bodyParser = require('body-parser');
 const handlebars = require('express-handlebars').create({ defaultLayout:'main' });
 
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', PORT);
+app.set('mysql', mysql);
 
 app.use(express.static('public'));
 

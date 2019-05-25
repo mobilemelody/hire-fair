@@ -11,7 +11,7 @@ Follow these instructions to get a copy of this project up and running on your l
 ### Installing
 1. Clone the repo to your local machine: `git clone https://github.com/mobilemelody/hire-fair.git`
 2. Install node modules: `npm install`
-3. Update `.env.template` with your databse URL and rename the file to `.env`
+3. Update `.env.template` with your databse URL and save the file as `.env`
 4. Run the node server using `node index.js`
 
 The project should now be running on http://localhost:3000

@@ -8,3 +8,6 @@ CREATE TABLE Applicant_User
 	PRIMARY KEY(Username),
 	UNIQUE(Username)
 );
+
+INSERT INTO Applicant_User VALUES
+('Elise.Hebert', '1234', 'Elise', 'Hebert', 'heberte@oregonstate.edu');

@@ -16,6 +16,9 @@ app.set('view engine', 'handlebars');
 app.set('port', PORT);
 app.set('mysql', mysql);
 
+/* Routes */
+app.use('/login', require('./routes/login.js'));
+
 app.use(express.static('public'));
 
 /* Homepage */

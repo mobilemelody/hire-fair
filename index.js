@@ -4,12 +4,14 @@ const express = require('express');
 const mysql = require('./dbcon.js');
 const bodyParser = require('body-parser');
 const handlebars = require('express-handlebars').create({ defaultLayout:'main' });
+const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(session({secret:'SuperSecretPassword'}));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');

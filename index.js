@@ -25,7 +25,22 @@ app.use(express.static('public'));
 
 /* Homepage */
 app.get('/',function(req,res,next) {
-	res.render('home');
+	let context = {};
+
+	// If there is no session, show homepage
+	if (!req.session.username) {
+		res.render('home');
+	}
+
+	// Otherwise show dashboard
+	else {
+		context.username = req.session.username;
+		context.isEmployer = req.session.isEmployer;
+		context.firstname = req.session.firstname;
+		context.lastname = req.session.lastname;
+		res.render('dashboard', context);
+	}
+
 });
 
 /* Routes for error handling */

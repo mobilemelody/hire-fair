@@ -1,6 +1,7 @@
 <div class="container">
 	<h1>Applicant Login</h1>
-	<form id="loginForm" action="/" method="post">
+	{{#if error}}<div class="alert alert-primary">{{error}}</div>{{/if}}
+	<form id="loginForm" action="/login" method="post">
 		<div class="form-row">
 			<label for="userName">Username</label>
 			<input type="text" class="form-control" id="userName" name="userName" required>

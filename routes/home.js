@@ -11,9 +11,9 @@ router.post('/', function(req, res, next) {
 	console.log(req.body);
 	var employer = req.body.employer;
 	if(employer != undefined){
-		res.render('employerlogin');
+		res.redirect('employer-login');
 	} else {
-		res.render('login');
+		res.redirect('login');
 	}
 });
 

@@ -12,7 +12,14 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-5">
-    <div class="navbar-brand">Hire Fair</div>
+    <a class="navbar-brand" href="/">Hire Fair</a>
+    <ul class="navbar-nav">
+      {{#if username}}<li class="nav-item"><a class="nav-link"><i class="fas fa-user pr-2"></i>{{username}}</a></li>
+      {{else}}
+      <li class="nav-item"><a class="nav-link" href="/employer-login">Employer Login</a></li>
+      <li class="nav-item"><a class="nav-link" href="/login">Applicant Login</a></li>
+      {{/if}}
+    </ul>
   </nav>
 	{{{body}}}
 

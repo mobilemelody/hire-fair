@@ -38,7 +38,7 @@ router.post('/', function(req, res, next) {
 		// Username and/or password not found
 		else {
 			context.error = "Username and/or password not found.";
-			res.render('login', context);
+			res.render('employerlogin', context);
 		}
 	})
 

@@ -21,6 +21,7 @@ app.set('mysql', mysql);
 /* Routes */
 app.use('/login', require('./routes/login.js'));
 app.use('/employer-login', require('./routes/employerlogin.js'));
+app.use('/', require('./routes/home.js'));
 
 app.use(express.static('public'));
 

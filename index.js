@@ -22,7 +22,7 @@ app.set('mysql', mysql);
 app.use('/login', require('./routes/login.js'));
 app.use('/employer-login', require('./routes/employerlogin.js'));
 app.use('/', require('./routes/home.js'));
-
+app.use('/listing', require('./routes/listing.js'));
 app.use(express.static('public'));
 
 /* Homepage */

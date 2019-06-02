@@ -11,6 +11,7 @@ CREATE TABLE Applicant_User
 
 CREATE TABLE Employer_User
 (
+ 
 	Username VARCHAR(40) NOT NULL,
 	Password VARCHAR(40) NOT NULL,
 	First VARCHAR(40) NOT NULL,
@@ -23,6 +24,19 @@ CREATE TABLE Employer_User
 	UNIQUE(Username)
 );
 
+
+CREATE TABLE listing
+(	ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY, 
+	internal bool NOT NULL,
+	jobTitle VARCHAR(40) NOT NULL,
+	location VARCHAR(40) NOT NULL,
+	description VARCHAR(40) NOT NULL,
+	salary VARCHAR(100) NOT NULL,
+	email VARCHAR(40) NOT NULL,
+	phone VARCHAR(40) NOT NULL
+);
+
+
 INSERT INTO Applicant_User VALUES
 ('Elise.Hebert', '1234', 'Elise', 'Hebert', 'heberte@oregonstate.edu'),
 ('Kyle.Hiebel', '1234', 'Kyle', 'Hiebel', 'hiebelky@oregonstate.edu'),
@@ -32,3 +46,6 @@ INSERT INTO Applicant_User VALUES
 
 INSERT INTO Employer_User VALUES
 ('Elise.Hebert', '1234', 'Elise', 'Hebert', 'heberte@oregonstate.edu', 'OregonState', 'HR', '(555) 867-5309');
+
+INSERT INTO listing VALUES
+('0', 'Grunt', 'Here', 'just a job', '10000000', 'heberte@oregonstate.edu', '(555) 867-5309');

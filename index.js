@@ -45,6 +45,19 @@ app.get('/',function(req,res,next) {
 
 });
 
+/* Logout */
+app.get('/logout',function(req,res,next) {
+	if (req.session.username) {
+		req.session.destroy(function(error) {
+			if(error) {
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			res.redirect('/');
+		})
+	}
+});
+
 /* Routes for error handling */
 app.use(function(req,res){
   res.status(404);

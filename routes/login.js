@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-
 /* Route for login page */
 router.get('/', function(req, res, next) {
 	res.render('login');
 });
 
+/* Route to authenticate login */
 router.post('/', function(req, res, next) {
 	let context = {};
 	let mysql = req.app.get('mysql');
@@ -27,10 +27,7 @@ router.post('/', function(req, res, next) {
 			req.session.lastname = results[0].Last;
 			req.session.isEmployer = 0;
 
-			context.username = req.session.username;
-			context.isEmployer = req.session.isEmployer;
-			context.firstname = req.session.firstname;
-			context.lastname = req.session.lastname;
+			context = req.session;
 
 			res.render('dashboard', context);
 		}

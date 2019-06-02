@@ -2,45 +2,40 @@
 	<h1>Create a Listing</h1>
 	{{#if error}}<div class="alert alert-primary">{{error}}</div>{{/if}}
 	<form id="loginForm" action="/listing" method="post">
-		<div class="form-row">
-			<label for="internal">Is this an internal job?</label> <br>
-			<label class="radio-inline"><input type="radio" class="form-control" id="yes" name="internal"> Yes </label>
+	<label class="pr-3" for="internal">Is this an internal job?</label>
+		<div class="form-group form-check form-check-inline">
+			<label class="form-check-label"><input type="radio" class="form-check-input" id="yes" name="internal">Yes</label>
 		</div>
-		<div class="form-row">
+		<div class="form-group">
 			<label for="JobTitle">Job Title</label>
 			<input type="text" class="form-control" id="JobTitle" name="JobTitle" required>
 		</div>
-		<div class="location">
+		<div class="form-group">
 			<label for="location">Location</label>
 			<input type="text" class="form-control" id="location" name="location" required>
 		</div>
-		<div class="description">
+		<div class="form-group">
 			<label for="description">Description</label>
 			<input type="text" class="form-control" id="description" name="description" required>
 		</div>
-		<div class="deadline">
+		<div class="form-group">
 			<label for="deadline">Deadline</label>
 			<input type="date" class="form-control" id="deadline" name="deadline" required>
 		</div>
-		<div class="salary">
+		<div class="form-group">
 			<label for="salary">Salary</label>
 			<input type="text" class="form-control" id="salary" name="salary" required>
 		</div>
-		<div class="email">
+		<div class="form-group">
 			<label for="email">Email</label>
 			<input type="text" class="form-control" id="email" name="email" required>
 		</div>
-		<div class="phone">
+		<div class="form-group">
 			<label for="phone">Phone</label>
 			<input type="text" class="form-control" id="phone" name="phone" required>
 		</div>
-		<div class="form-row pt-3">
-			<button type="submit" class="btn btn-primary mr-2">Add Requirement</button>
-
-		</div>
-		<div class="form-row pt-3">
-			<button type="submit" class="btn btn-primary mr-2">Submit</button>
-
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary mr-2">Add Requirements</button>
 		</div>
 	</form>
 </div>

@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({secret:'SuperSecretPassword'}));
+app.use(express.static('public'));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -23,27 +24,6 @@ app.use('/login', require('./routes/login.js'));
 app.use('/employer-login', require('./routes/employerlogin.js'));
 app.use('/', require('./routes/home.js'));
 app.use('/listing', require('./routes/listing.js'));
-app.use(express.static('public'));
-
-/* Homepage */
-app.get('/',function(req,res,next) {
-	let context = {};
-
-	// If there is no session, show homepage
-	if (!req.session.username) {
-		res.render('home');
-	}
-
-	// Otherwise show dashboard
-	else {
-		context.username = req.session.username;
-		context.isEmployer = req.session.isEmployer;
-		context.firstname = req.session.firstname;
-		context.lastname = req.session.lastname;
-		res.render('dashboard', context);
-	}
-
-});
 
 /* Logout */
 app.get('/logout',function(req,res,next) {

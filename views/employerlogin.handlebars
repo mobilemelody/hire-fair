@@ -2,15 +2,15 @@
 	<h1>Employer Login</h1>
 	{{#if error}}<div class="alert alert-primary">{{error}}</div>{{/if}}
 	<form id="loginForm" action="/employer-login" method="post">
-		<div class="form-row">
+		<div class="form-group">
 			<label for="userName">Username</label>
 			<input type="text" class="form-control" id="userName" name="userName" required>
 		</div>
-		<div class="form-row">
+		<div class="form-group">
 			<label for="password">Password</label>
 			<input type="password" class="form-control" id="password" name="password" required>
 		</div>
-		<div class="form-row pt-3">
+		<div class="form-group">
 			<button type="submit" class="btn btn-primary">Login</button>
 		</div>
 	</form>

@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-
 /* Route for listing form */
 router.get('/', function(req, res, next) {
-	if (req.session.username) {
+	if (req.session.isEmployer) {
 		let context = req.session;
 		res.render('listing', context);
 	}
@@ -30,7 +29,7 @@ router.post('/', function(req, res, next) {
 		}
 	})
 	context = req.session;
-	res.render('home', context);
+	res.redirect('/');
 });
 
 module.exports = router;

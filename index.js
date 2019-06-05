@@ -3,7 +3,14 @@ require('dotenv').config();
 const express = require('express');
 const mysql = require('./dbcon.js');
 const bodyParser = require('body-parser');
-const handlebars = require('express-handlebars').create({ defaultLayout:'main' });
+const handlebars = require('express-handlebars').create({ 
+	defaultLayout:'main',
+	helpers: {
+		formatDate: function(value) {
+			return value.toLocaleDateString();
+		}
+	}
+});
 const session = require('express-session');
 
 const app = express();

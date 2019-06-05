@@ -4,7 +4,7 @@
 	<h1>Job Listings</h1>
 	<p>Department: {{department}}</p>
 	<h2>External</h2>
-	<table>
+	<table class="table">
 	<thead>
 		<tr>
 		<th>Listing ID</th>
@@ -13,11 +13,20 @@
 		<th>Applicants</th>
 		</tr>
 	</thead>
-	<tbody></tbody>
+	<tbody>
+		{{#each external}}
+		<tr>
+			<td>{{listingID}}</td>
+			<td>{{jobTitle}}</td>
+			<td>{{deadline}}</td>
+			<td>{{numApplicants}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
 	</table>
 
 	<h2>Internal</h2>
-	<table>
+	<table class="table">
 	<thead>
 		<tr>
 		<th>Listing ID</th>
@@ -27,7 +36,17 @@
 		<th>Link</th>
 		</tr>
 	</thead>
-	<tbody></tbody>
+	<tbody>
+		{{#each internal}}
+		<tr>
+			<td>{{listingID}}</td>
+			<td>{{jobTitle}}</td>
+			<td>{{deadline}}</td>
+			<td>{{numApplicants}}</td>
+			<td><a>Link</a></td>
+		</tr>
+		{{/each}}
+	</tbody>
 	</table>
 
 	<!-- Applicant Dashboard -->

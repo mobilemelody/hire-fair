@@ -25,11 +25,12 @@ router.post('/', function(req, res, next) {
 			req.session.username = results[0].Username;
 			req.session.firstname = results[0].First;
 			req.session.lastname = results[0].Last;
+			req.session.department = results[0].Department;
 			req.session.isEmployer = 1;
 
 			context = req.session;
 
-			res.render('dashboard', context);
+			res.redirect('/');
 		}
 
 		// Username and/or password not found

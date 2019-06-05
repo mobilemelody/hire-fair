@@ -1,7 +1,36 @@
 <div class="container">
+	<!-- Employer Dashboard -->
 	{{#if isEmployer}}
-	<h1>Employer Dashboard</h1>
-	Hello, {{firstname}}!
+	<h1>Job Listings</h1>
+	<p>Department: {{department}}</p>
+	<h2>External</h2>
+	<table>
+	<thead>
+		<tr>
+		<th>Listing ID</th>
+		<th>Job Title</th>
+		<th>Deadline</th>
+		<th>Applicants</th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+	</table>
+
+	<h2>Internal</h2>
+	<table>
+	<thead>
+		<tr>
+		<th>Listing ID</th>
+		<th>Job Title</th>
+		<th>Deadline</th>
+		<th>Applicants</th>
+		<th>Link</th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+	</table>
+
+	<!-- Applicant Dashboard -->
 	{{else}}
 	<h1>Applicant Dashboard</h1>
 	Hello, {{firstname}}!

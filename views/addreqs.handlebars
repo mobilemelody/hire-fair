@@ -17,7 +17,10 @@
 		"<label for="+baseName+" id="+baseName+"-label>Description: </label>" +
 		"<input type=text id="+baseName+" name="+baseName+">" +
 		"<label for="+baseName+"-slider id="+baseName+"-slider-label>Weight: </label>" +
-		"<input type=range min=1 max=6 value=1 class=slider id="+baseName+"-slider> <br id="+baseName+"-linebreak>";
+		"<input type=range min=1 max=6 value=1 class=slider id="+baseName+"-slider oninput=setSliderLabel('"+baseName+"-slider')>"+ 
+		"<em id="+baseName+"-slider-value style='font-style: normal;'>1</em>"+
+		"<br id="+baseName+"-linebreak>";
+
 	}
 </script>
 
@@ -38,7 +41,20 @@
 		document.getElementById(containerName).removeChild(document.getElementById(baseName));
 		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-slider-label"));
 		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-slider"));
+		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-slider-value"));
 		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-linebreak"));
+	}
+</script>
+
+<script type="text/javascript">
+	function setSliderLabel(sliderID){
+		let val = document.getElementById(sliderID).value;
+		let sliderValue = sliderID + "-value";
+		if(val == 6){
+			document.getElementById(sliderValue).innerHTML = "Required";
+		} else {
+			document.getElementById(sliderValue).innerHTML = val;
+		}
 	}
 </script>
 
@@ -64,7 +80,8 @@
 		</select>
 
 		<label for="education-slider">Weight:</label>
-		<input type="range" min="1" max="6" value="1" class="slider" id="education-slider">
+		<input type="range" min="1" max="6" value="1" class="slider" id="education-slider" oninput="setSliderLabel('education-slider')">
+		<em id="education-slider-value" style="font-style: normal;">1</em>
 		<br>
 		
 		<p>Custom Requirements:</p>
@@ -89,7 +106,8 @@
 		</select>
 		
 		<label for="experience-slider">Weight:</label>
-		<input type="range" min="1" max="6" value="1" class="slider" id="experience-slider">
+		<input type="range" min="1" max="6" value="1" class="slider" id="experience-slider" oninput="setSliderLabel('experience-slider')">
+		<em id="experience-slider-value" style="font-style: normal;">1</em>
 		<br>
 		
 

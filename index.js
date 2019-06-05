@@ -31,6 +31,7 @@ app.use('/login', require('./routes/login.js'));
 app.use('/employer-login', require('./routes/employerlogin.js'));
 app.use('/', require('./routes/home.js'));
 app.use('/listing', require('./routes/listing.js'));
+app.use('/addreqs', require('./routes/addreqs.js'));
 
 /* Logout */
 app.get('/logout',function(req,res,next) {

@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
 		}
 	})
 	context = req.session;
-	res.redirect('/');
+	res.redirect('/addreqs');
 });
 
 module.exports = router;

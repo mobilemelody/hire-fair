@@ -35,7 +35,8 @@ CREATE TABLE listing
 	email VARCHAR(40) NOT NULL,
 	phone VARCHAR(40) NOT NULL,
 	employerUserName VARCHAR (40) NOT NULL,
-	numApplicants INT,
+	numApplicants INT DEFAULT 0,
+	deadline DATE NOT NULL,
 	PRIMARY KEY(listingID),
 	FOREIGN KEY(employerUserName) REFERENCES Employer_User(Username)
 ); 
@@ -54,11 +55,11 @@ INSERT INTO Applicant_User VALUES
 INSERT INTO Employer_User VALUES
 ('Elise.Hebert', '1234', 'Elise', 'Hebert', 'heberte@oregonstate.edu', 'OregonState', 'HR', '(555) 867-5309');
 
-INSERT INTO listing (internal, jobTitle, location, description, salary, email, phone, employerUserName, numApplicants)VALUES
-('0','Grunt', 'Here', 'just a job', '10000000', 'heberte@oregonstate.edu', '(555) 867-5309', 'Elise.Hebert', 1);
+INSERT INTO listing (internal, jobTitle, location, description, salary, email, phone, employerUserName, numApplicants, deadline)VALUES
+('0','Grunt', 'Here', 'just a job', '10000000', 'heberte@oregonstate.edu', '(555) 867-5309', 'Elise.Hebert', 1, "2019-6-2");
 
 
-INSERT INTO listing (internal, jobTitle, location, description, salary, email, phone, employerUserName, numApplicants)VALUES
-('1','Other', 'Here', 'just a job', '10000002', 'heberte@oregonstate.edu', '(555) 867-5309', 'Elise.Hebert', 4);
+INSERT INTO listing (internal, jobTitle, location, description, salary, email, phone, employerUserName, numApplicants, deadline)VALUES
+('1','Other', 'Here', 'just a job', '10000002', 'heberte@oregonstate.edu', '(555) 867-5309', 'Elise.Hebert', 4, "2019-8-10");
 
 

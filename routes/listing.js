@@ -4,10 +4,13 @@ const router = express.Router();
 
 /* Route for listing form */
 router.get('/', function(req, res, next) {
-	
+	if (req.session.username) {
 		let context = req.session;
 		res.render('listing', context);
-	
+	}
+	else {
+		res.render('employerlogin');
+	}
 });
 
 /* Route to add listing */

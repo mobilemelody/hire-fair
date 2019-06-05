@@ -7,7 +7,8 @@ const handlebars = require('express-handlebars').create({
 	defaultLayout:'main',
 	helpers: {
 		formatDate: function(value) {
-			return value.toLocaleDateString();
+			let date = new Date(value);
+			return date.toLocaleDateString();
 		}
 	}
 });

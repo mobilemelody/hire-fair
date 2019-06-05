@@ -27,9 +27,10 @@ router.post('/', function(req, res, next) {
 			res.write(JSON.stringify(error));
 			res.end();
 		}
-	})
-	context = req.session;
-	res.redirect('/addreqs');
+		
+		context = req.session;
+		res.redirect('/addreqs/:'+results.insertId);
+	})	
 });
 
 module.exports = router;

@@ -8,19 +8,24 @@ router.get('/:id', function(req, res, next) {
 		
 		// Query to retrieve the listing that was just created
 		let mysql = req.app.get('mysql');
-		let sql = "SELECT * FROM listing WHERE listingID='?'";
-		let inserts = [req.params.id];
+		let sql = "SELECT * FROM listing WHERE listingID=?";
+		let listingID = req.params.id.substr(1);
+		let inserts = [listingID];
 		mysql.pool.query(sql, inserts, function(error, results, fields) {
 			if(error) {
 				res.write(JSON.stringify(error));
 				res.end();
 			}
 			
-			if(results.length > 0){
+			if(results != undefined){
 				context['jobTitle'] = results[0].jobTitle;
 				context['salary'] = results[0].salary;
 				context['location'] = results[0].location;
-				context['listingType'] = results[0].Internal;
+				if(results[0].internal){
+					context['listingType'] = "Internal";
+				} else {
+					context['listingType'] = "External";
+				}
 			}
 			
 			res.render('addreqs', context);

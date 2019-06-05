@@ -14,15 +14,13 @@ router.get('/:id', function(req, res, next) {
 			if(error) {
 				res.write(JSON.stringify(error));
 				res.end();
-			} else {
-				console.log(results[0]);
 			}
-		}) // CRASHES FOR SOME REASON
-		/*context['jobTitle'] = results['jobTitle'];
-		context['salary'] = results['salary'];
-		context['location'] = results['location'];
-		context['listingType'] = results['Internal'];*/
-		res.render('addreqs', context);
+			context['jobTitle'] = results['jobTitle'];
+			context['salary'] = results['salary'];
+			context['location'] = results['location'];
+			context['listingType'] = results['Internal'];
+			res.render('addreqs', context);
+		}) 
 	}
 	else {
 		res.render('employerlogin');

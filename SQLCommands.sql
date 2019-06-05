@@ -26,15 +26,22 @@ CREATE TABLE Employer_User
 
 
 CREATE TABLE listing
-(	ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY, 
+(	listingID INT NOT NULL AUTO_INCREMENT, 
 	internal bool NOT NULL,
 	jobTitle VARCHAR(40) NOT NULL,
 	location VARCHAR(40) NOT NULL,
 	description VARCHAR(40) NOT NULL,
 	salary VARCHAR(100) NOT NULL,
 	email VARCHAR(40) NOT NULL,
-	phone VARCHAR(40) NOT NULL
-);
+	phone VARCHAR(40) NOT NULL,
+	employerUserName VARCHAR (40) NOT NULL,
+	numApplicants INT,
+	PRIMARY KEY(listingID),
+	FOREIGN KEY(employerUserName) REFERENCES Employer_User(Username)
+); 
+
+
+
 
 
 INSERT INTO Applicant_User VALUES
@@ -47,5 +54,11 @@ INSERT INTO Applicant_User VALUES
 INSERT INTO Employer_User VALUES
 ('Elise.Hebert', '1234', 'Elise', 'Hebert', 'heberte@oregonstate.edu', 'OregonState', 'HR', '(555) 867-5309');
 
-INSERT INTO listing VALUES
-('0', 'Grunt', 'Here', 'just a job', '10000000', 'heberte@oregonstate.edu', '(555) 867-5309');
+INSERT INTO listing (internal, jobTitle, location, description, salary, email, phone, employerUserName, numApplicants)VALUES
+('0','Grunt', 'Here', 'just a job', '10000000', 'heberte@oregonstate.edu', '(555) 867-5309', 'Elise.Hebert', 1);
+
+
+INSERT INTO listing (internal, jobTitle, location, description, salary, email, phone, employerUserName, numApplicants)VALUES
+('1','Other', 'Here', 'just a job', '10000002', 'heberte@oregonstate.edu', '(555) 867-5309', 'Elise.Hebert', 4);
+
+

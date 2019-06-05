@@ -3,7 +3,8 @@ const router = express.Router();
 
 /* Note: Filter by context.session.username */
 function getExternalListings(res, mysql, context, complete) {
-	let sql = ""; // TODO
+	let sql = "SELECT * from listing WHERE internal=0 AND employerUserName=?;";
+	var inserts = context.session.username;  // TODO
 	mysql.pool.query(sql, inserts, function(error, results, fields) {
 		if(error) {
 			res.write(JSON.stringify(error));
@@ -15,7 +16,8 @@ function getExternalListings(res, mysql, context, complete) {
 }
 
 function getInternalListings(res, mysql, context, complete) {
-	let sql = ""; // TODO
+	let sql = "SELECT * from listing WHERE internal=1 AND employerUserName=?;";
+	var inserts = context.session.username;  // TODO
 	mysql.pool.query(sql, inserts, function(error, results, fields) {
 		if(error) {
 			res.write(JSON.stringify(error));

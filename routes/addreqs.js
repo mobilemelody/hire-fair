@@ -9,8 +9,7 @@ router.get('/:id', function(req, res, next) {
 		// Query to retrieve the listing that was just created
 		let mysql = req.app.get('mysql');
 		let sql = "SELECT * FROM listing WHERE listingID=?";
-		let listingID = req.params.id.substr(1);
-		let inserts = [listingID];
+		let inserts = [req.params.id];
 		mysql.pool.query(sql, inserts, function(error, results, fields) {
 			if(error) {
 				res.write(JSON.stringify(error));

@@ -13,13 +13,47 @@
 		
 		let baseName = reqType + "-custom-req-" + num;
 		let containerName = reqType + "-custom-requirements";
-		document.getElementById(containerName).innerHTML += 
-		"<label for="+baseName+" id="+baseName+"-label>Description: </label>" +
-		"<input type=text id="+baseName+" name="+baseName+">" +
-		"<label for="+baseName+"-slider id="+baseName+"-slider-label>Weight: </label>" +
-		"<input type=range min=1 max=6 value=1 class=slider id="+baseName+"-slider oninput=setSliderLabel('"+baseName+"-slider')>"+ 
-		"<em id="+baseName+"-slider-value style='font-style: normal;'>1</em>"+
-		"<br id="+baseName+"-linebreak>";
+
+		document.getElementById(reqType + '-num-requirements').value = localStorage.getItem(varName);
+
+		let txtlabel = document.createElement("label");
+    txtlabel.setAttribute("for", baseName);
+    txtlabel.setAttribute("id", baseName + "-label");
+    txtlabel.innerHTML = "Description: ";
+
+    let txtinput = document.createElement("input");
+    txtinput.setAttribute("type", "text");
+    txtinput.setAttribute("id", baseName);
+    txtinput.setAttribute("name", baseName);
+
+    let sldrlabel = document.createElement("label");
+    sldrlabel.setAttribute("for", baseName + "-slider");
+    sldrlabel.setAttribute("id", baseName + "-slider-label");
+    sldrlabel.innerHTML = "Weight: ";
+
+    let sldrinput = document.createElement("input");
+    sldrinput.setAttribute("type", "range");
+    sldrinput.setAttribute("id", baseName + "-slider");
+    sldrinput.setAttribute("name", baseName + "-slider");
+    sldrinput.setAttribute("min", 1);
+    sldrinput.setAttribute("max", 6);
+    sldrinput.setAttribute("value", 1);
+    sldrinput.setAttribute("class", "slider");
+    sldrinput.setAttribute("oninput", "setSliderLabel('" + baseName + "-slider')");
+
+    let sldrvalue = document.createElement("span");
+    sldrvalue.setAttribute("id", baseName + "-slider-value");
+    sldrvalue.innerHTML = 1;
+
+    let linebreak = document.createElement("br");
+    linebreak.setAttribute("id", baseName + "-linebreak");
+
+    document.getElementById(containerName).appendChild(txtlabel);
+    document.getElementById(containerName).appendChild(txtinput);
+    document.getElementById(containerName).appendChild(sldrlabel);
+    document.getElementById(containerName).appendChild(sldrinput);
+    document.getElementById(containerName).appendChild(sldrvalue);
+    document.getElementById(containerName).appendChild(linebreak);
 
 	}
 </script>
@@ -37,6 +71,9 @@
 		
 		let baseName = reqType + "-custom-req-" + num;
 		let containerName = reqType + "-custom-requirements";
+
+		document.getElementById(reqType + '-num-requirements').value = localStorage.getItem(varName);
+
 		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-label"));
 		document.getElementById(containerName).removeChild(document.getElementById(baseName));
 		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-slider-label"));
@@ -72,15 +109,15 @@
 		
 		<label for="education-combo">Education Level:</label>
 		<select name="education-combo">
-			<option value="highschool">High school</option>
-			<option value="associates">Associate's Degree</option>
-			<option value="bachelors">Bachelor's Degree</option>
-			<option value="masters">Master's Degree</option>
-			<option value="doctorate">Doctorate Degree</option>
+			<option value="High school">High school</option>
+			<option value="Associate's Degree">Associate's Degree</option>
+			<option value="Bachelor's Degree">Bachelor's Degree</option>
+			<option value="Master's Degree">Master's Degree</option>
+			<option value="Doctorate Degree">Doctorate Degree</option>
 		</select>
 
 		<label for="education-slider">Weight:</label>
-		<input type="range" min="1" max="6" value="1" class="slider" id="education-slider" oninput="setSliderLabel('education-slider')">
+		<input type="range" min="1" max="6" value="1" class="slider" id="education-slider" name="education-slider" oninput="setSliderLabel('education-slider')">
 		<em id="education-slider-value" style="font-style: normal;">1</em>
 		<br>
 		
@@ -92,21 +129,22 @@
 		<div id="education-custom-requirements">
 
 		</div>
+		<input type="hidden" id="education-num-requirements" name="education-num-requirements" value="0">
 		
 		<h2>EXPERIENCE</h2>
 		<hr>
 		
 		<label for="experience-combo">Years of Experience:</label>
 		<select name="experience-combo">
-			<option value="0">0-1</option>
-			<option value="1">2-3</option>
-			<option value="2">4-7</option>
-			<option value="2">7-12</option>
-			<option value="3">13+</option>
+			<option value="0-1">0-1</option>
+			<option value="2-3">2-3</option>
+			<option value="4-7">4-7</option>
+			<option value="7-12">7-12</option>
+			<option value="13+">13+</option>
 		</select>
 		
 		<label for="experience-slider">Weight:</label>
-		<input type="range" min="1" max="6" value="1" class="slider" id="experience-slider" oninput="setSliderLabel('experience-slider')">
+		<input type="range" min="1" max="6" value="1" class="slider" id="experience-slider" name="experience-slider" oninput="setSliderLabel('experience-slider')">
 		<em id="experience-slider-value" style="font-style: normal;">1</em>
 		<br>
 		
@@ -118,6 +156,7 @@
 		<div id="experience-custom-requirements">
 
 		</div>
+		<input type="hidden" id="experience-num-requirements" name="experience-num-requirements" value="0">
 		
 		
 		<h2>SKILLS</h2>
@@ -131,6 +170,7 @@
 		<div id="skills-custom-requirements">
 
 		</div>
+		<input type="hidden" id="skills-num-requirements" name="skills-num-requirements" value="0">
 		
 		
 		<h2>CERTIFICATIONS</h2>
@@ -144,6 +184,7 @@
 		<div id="certifications-custom-requirements">
 
 		</div>
+		<input type="hidden" id="certifications-num-requirements" name="certifications-num-requirements" value="0">
 		
 		<div class="form-group">
 			<button type="submit" class="btn btn-primary mr-2">Submit</button>

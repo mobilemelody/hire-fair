@@ -25,6 +25,7 @@
     txtinput.setAttribute("type", "text");
     txtinput.setAttribute("id", baseName);
     txtinput.setAttribute("name", baseName);
+    txtinput.required = true;
 
     let sldrlabel = document.createElement("label");
     sldrlabel.setAttribute("for", baseName + "-slider");
@@ -97,7 +98,7 @@
 
 <div class="container">
 	<h1>Add Job Requirements</h1>
-		<form id="reqForm" action="/addreqs" method="post">
+		<form id="reqForm" action="/addreqs/{{listingid}}" method="post">
 	
 		{{#if jobTitle}}<p>Job Title: {{jobTitle}}</p>{{/if}}
 		{{#if location}}<p>Location: {{location}}</p>{{/if}}

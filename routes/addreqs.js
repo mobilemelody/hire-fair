@@ -6,7 +6,7 @@ router.get('/:id', function(req, res, next) {
 	if (req.session.isEmployer) {
 		let context = req.session;
 		
-		// Query to retrieve the listing that was just created
+		// Query to retrieve the listing
 		let mysql = req.app.get('mysql');
 		let sql = "SELECT * FROM listing WHERE listingID=?";
 		let inserts = [req.params.id];
@@ -38,26 +38,25 @@ router.get('/:id', function(req, res, next) {
 /* Route to add requirements to database */
 router.post('/:id', function(req, res, next) {
 	let context = {};
-
 	let mysql = req.app.get('mysql');
 	let sql = "INSERT INTO requirement (reqType, description, weight, listingID) VALUES ";
 	let inserts = [];
 
-	/* Add default education requirement */
+	// Add default education requirement
 	sql += "(?, ?, ?, ?)";
 	inserts.push("education");
 	inserts.push(req.body['education-combo']);
 	inserts.push(req.body['education-slider']);
 	inserts.push(req.params.id);
 
-	/* Add default experience requirement */
+	// Add default experience requirement
 	sql += ", (?, ?, ?, ?)";
 	inserts.push("experience");
 	inserts.push(req.body['experience-combo']);
 	inserts.push(req.body['experience-slider']);
 	inserts.push(req.params.id);
 
-	/* Add custom requirements */
+	// Add custom requirements
 	let reqTypes = ['education', 'experience', 'skills', 'certifications'];
 	for (let i = 0; i < 4; i++) {
 		let type = reqTypes[i];
@@ -70,19 +69,17 @@ router.post('/:id', function(req, res, next) {
 			inserts.push(req.body[type + '-custom-req-' + j + '-slider']);
 			inserts.push(req.params.id);
 		}
-		
-	} 
+	}
 
+	// Run query
 	mysql.pool.query(sql, inserts, function(error, results, fields) {
 		if(error) {
 			res.write(JSON.stringify(error));
 			res.end();
 		}
-					
 		res.redirect('/');
 	})
 
 });
-
 
 module.exports = router;

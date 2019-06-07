@@ -41,6 +41,16 @@ CREATE TABLE listing
 	FOREIGN KEY(employerUserName) REFERENCES Employer_User(Username)
 ); 
 
+CREATE TABLE requirement
+(	reqID INT NOT NULL AUTO_INCREMENT, 
+	reqType VARCHAR(40) NOT NULL,
+	description VARCHAR(100) NOT NULL,
+	weight INT NOT NULL,
+	listingID INT NOT NULL,
+	PRIMARY KEY(reqID),
+	FOREIGN KEY(listingID) REFERENCES listing(listingID)
+);
+
 
 
 

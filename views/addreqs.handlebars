@@ -16,6 +16,10 @@
 
 		document.getElementById(reqType + '-num-requirements').value = localStorage.getItem(varName);
 
+		let formRow = document.createElement("div");
+		formRow.setAttribute("id", baseName + "-form-row")
+		formRow.setAttribute("class", "form-group row");
+
 		let txtlabel = document.createElement("label");
     txtlabel.setAttribute("for", baseName);
     txtlabel.setAttribute("id", baseName + "-label");
@@ -25,7 +29,14 @@
     txtinput.setAttribute("type", "text");
     txtinput.setAttribute("id", baseName);
     txtinput.setAttribute("name", baseName);
+    txtinput.setAttribute("class", "form-control")
     txtinput.required = true;
+
+    let txtDiv = document.createElement("div");
+    txtDiv.setAttribute("class", "col-md-9");
+
+    txtDiv.appendChild(txtlabel);
+    txtDiv.appendChild(txtinput);
 
     let sldrlabel = document.createElement("label");
     sldrlabel.setAttribute("for", baseName + "-slider");
@@ -39,22 +50,24 @@
     sldrinput.setAttribute("min", 1);
     sldrinput.setAttribute("max", 6);
     sldrinput.setAttribute("value", 1);
-    sldrinput.setAttribute("class", "slider");
+    sldrinput.setAttribute("class", "form-control-range");
     sldrinput.setAttribute("oninput", "setSliderLabel('" + baseName + "-slider')");
 
     let sldrvalue = document.createElement("span");
     sldrvalue.setAttribute("id", baseName + "-slider-value");
     sldrvalue.innerHTML = 1;
 
-    let linebreak = document.createElement("br");
-    linebreak.setAttribute("id", baseName + "-linebreak");
+    let sldrDiv = document.createElement("div");
+    sldrDiv.setAttribute("class", "col-md-3");
 
-    document.getElementById(containerName).appendChild(txtlabel);
-    document.getElementById(containerName).appendChild(txtinput);
-    document.getElementById(containerName).appendChild(sldrlabel);
-    document.getElementById(containerName).appendChild(sldrinput);
-    document.getElementById(containerName).appendChild(sldrvalue);
-    document.getElementById(containerName).appendChild(linebreak);
+    sldrDiv.appendChild(sldrlabel);
+    sldrDiv.appendChild(sldrinput);
+    sldrDiv.appendChild(sldrvalue);
+
+    formRow.appendChild(txtDiv);
+    formRow.appendChild(sldrDiv);
+
+    document.getElementById(containerName).appendChild(formRow);
 
 	}
 </script>
@@ -75,12 +88,7 @@
 
 		document.getElementById(reqType + '-num-requirements').value = localStorage.getItem(varName);
 
-		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-label"));
-		document.getElementById(containerName).removeChild(document.getElementById(baseName));
-		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-slider-label"));
-		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-slider"));
-		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-slider-value"));
-		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-linebreak"));
+		document.getElementById(containerName).removeChild(document.getElementById(baseName+"-form-row"));
 	}
 </script>
 
@@ -98,61 +106,73 @@
 
 <div class="container">
 	<h1>Add Job Requirements</h1>
+
+		<ul class="list-group py-3">
+			{{#if jobTitle}}<li class="list-group-item">Job Title: {{jobTitle}}</li>{{/if}}
+			{{#if location}}<li class="list-group-item">Location: {{location}}</li>{{/if}}
+			{{#if salary}}<li class="list-group-item">Salary: ${{salary}}</li>{{/if}}
+			{{#if listingType}}<li class="list-group-item">Listing Type: {{listingType}}</li>{{/if}}
+		</ul>
+
 		<form id="reqForm" action="/addreqs/{{listingid}}" method="post">
-	
-		{{#if jobTitle}}<p>Job Title: {{jobTitle}}</p>{{/if}}
-		{{#if location}}<p>Location: {{location}}</p>{{/if}}
-		{{#if salary}}<p>Salary: ${{salary}}</p>{{/if}}
-		{{#if listingType}}<p>Listing Type: {{listingType}}</p>{{/if}}
-				
-		<h2>EDUCATION</h2>
-		<hr>
-		
-		<label for="education-combo">Education Level:</label>
-		<select name="education-combo">
-			<option value="High school">High school</option>
-			<option value="Associate's Degree">Associate's Degree</option>
-			<option value="Bachelor's Degree">Bachelor's Degree</option>
-			<option value="Master's Degree">Master's Degree</option>
-			<option value="Doctorate Degree">Doctorate Degree</option>
-		</select>
-
-		<label for="education-slider">Weight:</label>
-		<input type="range" min="1" max="6" value="1" class="slider" id="education-slider" name="education-slider" oninput="setSliderLabel('education-slider')">
-		<em id="education-slider-value" style="font-style: normal;">1</em>
-		<br>
-		
-		<p>Custom Requirements:</p>
-		<button type="button" onclick="insertCustomReq('education')"> <i class="fas fa-plus"></i> Add</button>
-		<button type="button" onclick="removeCustomReq('education')"> <i class="fas fa-trash"></i> Remove</button>
-		
-
-		<div id="education-custom-requirements">
-
+		<h2 class="pt-3">EDUCATION</h2>
+		<hr>		
+		<div class="form-group row">
+			<div class="col-md-9">
+				<label for="education-combo">Education Level:</label>
+				<select name="education-combo" class="form-control">
+					<option value="High school">High school</option>
+					<option value="Associate's Degree">Associate's Degree</option>
+					<option value="Bachelor's Degree">Bachelor's Degree</option>
+					<option value="Master's Degree">Master's Degree</option>
+					<option value="Doctorate Degree">Doctorate Degree</option>
+				</select>
+			</div>
+			<div class="col-md-3">
+			<label for="education-slider">Weight:</label>
+			<input type="range" min="1" max="6" value="1" class="form-control-range" id="education-slider" name="education-slider" oninput="setSliderLabel('education-slider')">
+			<span id="education-slider-value">1</span>
+			</div>
 		</div>
+		
+		<div class="form-group row">
+			<div class="col-md-6"><h4>Custom Requirements:</h4></div>
+			<div class="col-md-6 text-right">
+				<button type="button" class="btn btn-primary" onclick="insertCustomReq('education')"><i class="fas fa-plus pr-2"></i>Add</button>
+				<button type="button" class="btn btn-primary" onclick="removeCustomReq('education')"><i class="fas fa-trash pr-2"></i>Remove</button>
+			</div>
+		</div>
+
+		<div id="education-custom-requirements" class="list-group"></div>
 		<input type="hidden" id="education-num-requirements" name="education-num-requirements" value="0">
 		
-		<h2>EXPERIENCE</h2>
+		<h2 class="pt-3">EXPERIENCE</h2>
 		<hr>
-		
-		<label for="experience-combo">Years of Experience:</label>
-		<select name="experience-combo">
-			<option value="0-1">0-1</option>
-			<option value="2-3">2-3</option>
-			<option value="4-7">4-7</option>
-			<option value="7-12">7-12</option>
-			<option value="13+">13+</option>
-		</select>
-		
-		<label for="experience-slider">Weight:</label>
-		<input type="range" min="1" max="6" value="1" class="slider" id="experience-slider" name="experience-slider" oninput="setSliderLabel('experience-slider')">
-		<em id="experience-slider-value" style="font-style: normal;">1</em>
-		<br>
-		
+		<div class="form-group row">
+			<div class="col-md-9">
+				<label for="experience-combo">Years of Experience:</label>
+				<select name="experience-combo" class="form-control">
+					<option value="0-1">0-1</option>
+					<option value="2-3">2-3</option>
+					<option value="4-7">4-7</option>
+					<option value="7-12">7-12</option>
+					<option value="13+">13+</option>
+				</select>
+			</div>
+			<div class="col-md-3">
+				<label for="experience-slider">Weight:</label>
+				<input type="range" min="1" max="6" value="1" class="form-control-range" id="experience-slider" name="experience-slider" oninput="setSliderLabel('experience-slider')">
+				<span id="experience-slider-value" style="font-style: normal;">1</span>
+			</div>
+		</div>
 
-		<p>Custom Requirements:</p>
-		<button type="button" onclick="insertCustomReq('experience')"> <i class="fas fa-plus"></i> Add</button>
-		<button type="button" onclick="removeCustomReq('experience')"> <i class="fas fa-trash"></i> Remove</button>
+		<div class="form-group row">
+			<div class="col-md-6"><h4>Custom Requirements:</h4></div>
+			<div class="col-md-6 text-right">
+				<button type="button" class="btn btn-primary" onclick="insertCustomReq('experience')"><i class="fas fa-plus pr-2"></i>Add</button>
+				<button type="button" class="btn btn-primary" onclick="removeCustomReq('experience')"><i class="fas fa-trash pr-2"></i>Remove</button>
+			</div>
+		</div>
 		
 		<div id="experience-custom-requirements">
 
@@ -160,31 +180,32 @@
 		<input type="hidden" id="experience-num-requirements" name="experience-num-requirements" value="0">
 		
 		
-		<h2>SKILLS</h2>
+		<h2 class="pt-3">SKILLS</h2>
 		<hr>
 		
-		<p>Custom Requirements:</p>
-		<button type="button" onclick="insertCustomReq('skills')"> <i class="fas fa-plus"></i> Add</button>
-		<button type="button" onclick="removeCustomReq('skills')"> <i class="fas fa-trash"></i> Remove</button>
-		
+		<div class="form-group row">
+			<div class="col-md-6"><h4>Custom Requirements:</h4></div>
+			<div class="col-md-6 text-right">
+				<button type="button" class="btn btn-primary" onclick="insertCustomReq('skills')"><i class="fas fa-plus pr-2"></i>Add</button>
+				<button type="button" class="btn btn-primary" onclick="removeCustomReq('skills')"><i class="fas fa-trash pr-2"></i>Remove</button>
+			</div>
+		</div>	
 
-		<div id="skills-custom-requirements">
-
-		</div>
+		<div id="skills-custom-requirements"></div>
 		<input type="hidden" id="skills-num-requirements" name="skills-num-requirements" value="0">
 		
-		
-		<h2>CERTIFICATIONS</h2>
+		<h2 class="pt-3">CERTIFICATIONS</h2>
 		<hr>
 		
-		<p>Custom Requirements:</p>
-		<button type="button" onclick="insertCustomReq('certifications')"> <i class="fas fa-plus"></i> Add</button>
-		<button type="button" onclick="removeCustomReq('certifications')"> <i class="fas fa-trash"></i> Remove</button>
-		
-
-		<div id="certifications-custom-requirements">
-
+		<div class="form-group row">
+			<div class="col-md-6"><h4>Custom Requirements:</h4></div>
+			<div class="col-md-6 text-right">
+				<button type="button" class="btn btn-primary" onclick="insertCustomReq('certifications')"><i class="fas fa-plus pr-2"></i>Add</button>
+				<button type="button" class="btn btn-primary" onclick="removeCustomReq('certifications')"><i class="fas fa-trash pr-2"></i>Remove</button>
+			</div>
 		</div>
+
+		<div id="certifications-custom-requirements"></div>
 		<input type="hidden" id="certifications-num-requirements" name="certifications-num-requirements" value="0">
 		
 		<div class="form-group">
